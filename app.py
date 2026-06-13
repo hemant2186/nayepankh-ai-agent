@@ -442,7 +442,7 @@ def render_role_recommender(knowledge_base: str, api_key: str) -> None:
 
 
 def main() -> None:
-    st.set_page_config(page_title=APP_TITLE, page_icon="NP", layout="wide")
+    st.set_page_config(page_title=APP_TITLE, page_icon="🌱", layout="wide")
     inject_custom_css()
     initialize_session_state()
 

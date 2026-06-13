@@ -2,6 +2,10 @@
 
 An AI-powered assistant built with Python, Streamlit, and Google Gemini 2.5 Flash to help students and volunteers explore NayePankh Foundation internship opportunities, receive personalized role recommendations, and get answers to common internship questions.
 
+## Live Demo
+
+Try the deployed app here: https://naye-pankh-ai-agent.streamlit.app/
+
 This project was developed for an AI Agent Development Internship submission and demonstrates:
 
 - AI agent development
@@ -58,7 +62,7 @@ The sidebar displays internship details and available roles. Each role button ad
 ## Project Structure
 
 ```text
-nayepankh-ai-agent/
+naye-pankh-ai-agent/
 |-- app.py
 |-- knowledge_base.txt
 |-- requirements.txt
@@ -77,8 +81,8 @@ nayepankh-ai-agent/
 Clone the repository:
 
 ```bash
-git clone https://github.com/hemant2186/nayepankh-ai-agent.git
-cd nayepankh-ai-agent
+git clone https://github.com/hemant2186/naye-pankh-ai-agent.git
+cd naye-pankh-ai-agent
 ```
 
 Install dependencies:
@@ -173,7 +177,7 @@ Generated Response
 
 1. Push this repository to GitHub.
 2. Open Streamlit Cloud.
-3. Create a new app from `hemant2186/nayepankh-ai-agent`.
+3. Create a new app from `hemant2186/naye-pankh-ai-agent`.
 4. Set the main file path to:
 
 ```text
