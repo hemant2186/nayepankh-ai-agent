@@ -168,8 +168,28 @@ def local_role_recommendation(skills: str, interests: str = "") -> List[str]:
     ]
 
 
+def build_structured_recommendation(skills: str, interests: str, roles: List[str]) -> str:
+    top_roles = roles[:4]
+    role_lines = "\n".join(f"- **{role}**: Matches your skills and learning interests." for role in top_roles)
+
+    return f"""
+Based on your profile, the best internship role matches are:
+
+{role_lines}
+
+**Why these roles fit**
+- Your skills: {skills.strip() or "Not provided"}
+- Your interests: {interests.strip() or "Not provided"}
+- These roles align with the remote, 1-month NayePankh internship format and are suitable for students and freshers.
+
+**Recommended next step**
+Prepare a short portfolio or project summary showing how you used these skills, then apply for the role that best matches your strongest area.
+""".strip()
+
+
 def generate_role_recommendation(skills: str, interests: str, knowledge_base: str, api_key: str) -> str:
     fallback_roles = local_role_recommendation(skills, interests)
+    fallback_response = build_structured_recommendation(skills, interests, fallback_roles)
     prompt = f"""
 Recommend the best NayePankh internship roles for this candidate.
 
@@ -179,17 +199,31 @@ Skills:
 Interests:
 {interests}
 
-Start with the top roles, then explain the match in short bullet points.
-Also suggest one practical next step for the candidate.
+Use only these role names when recommending roles:
+{", ".join(fallback_roles)}
+
+Return a complete answer in this exact structure:
+Based on your profile, the best internship role matches are:
+- **Role Name**: One short reason.
+- **Role Name**: One short reason.
+
+**Why these roles fit**
+- Mention the candidate's skills.
+- Mention the candidate's interests.
+- Mention that the internship is remote and 1 month.
+
+**Recommended next step**
+One practical next step.
 """.strip()
 
     try:
-        return generate_response(prompt, knowledge_base, api_key)
+        response = generate_response(prompt, knowledge_base, api_key)
+        if len(response.split()) < 35 or "recommended next step" not in response.lower():
+            return fallback_response
+        return response
     except RuntimeError as exc:
         return (
-            "Based on the skills and interests provided, suitable roles are: "
-            f"{', '.join(fallback_roles)}.\n\n"
-            "These roles match the technical keywords in your profile. "
+            f"{fallback_response}\n\n"
             f"Note: Gemini could not be reached right now. {exc}"
         )
 
@@ -338,7 +372,7 @@ def render_role_recommender(knowledge_base: str, api_key: str) -> None:
                 }
             )
             st.session_state.messages.append({"role": "assistant", "content": recommendation})
-            st.success("Recommendation added to the chat.")
+            st.rerun()
 
 
 def main() -> None:
