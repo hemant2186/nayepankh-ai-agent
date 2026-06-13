@@ -16,7 +16,7 @@ Built for an AI Agent Development Internship submission.
 - Internship role recommendations
 - Session memory with `st.session_state`
 - ChatGPT-like Streamlit chat interface
-- Professional sidebar with program details and roles
+- Professional sidebar with program details and interactive roles
 - Bonus role recommendation form
 - Streamlit Cloud compatible configuration
 - Environment variable based API key handling
@@ -33,12 +33,12 @@ Built for an AI Agent Development Internship submission.
 
 ```text
 naye-pankh-ai-agent/
-├── app.py
-├── knowledge_base.txt
-├── requirements.txt
-├── README.md
-├── .env.example
-└── assets/
+|-- app.py
+|-- knowledge_base.txt
+|-- requirements.txt
+|-- README.md
+|-- .env.example
+`-- assets/
 ```
 
 ## Installation
@@ -82,6 +82,7 @@ Then open the local URL shown by Streamlit.
 3. Each Gemini call receives the knowledge base, recent chat history, and the latest user prompt.
 4. The assistant responds professionally and avoids inventing information outside the knowledge base.
 5. The role recommender uses Gemini, with a local keyword fallback if Gemini is unavailable.
+6. Sidebar role buttons add instant role-specific guidance to the chat.
 
 ## Deployment Steps
 
@@ -93,7 +94,7 @@ Then open the local URL shown by Streamlit.
 4. Set the main file path to:
 
 ```text
-naye-pankh-ai-agent/app.py
+app.py
 ```
 
 5. Add the following secret in Streamlit Cloud settings:
@@ -106,11 +107,21 @@ GEMINI_API_KEY = "your_gemini_api_key_here"
 
 ## Screenshots
 
-Add screenshots here after running the app:
+### Home and Role Recommendation Form
 
-- Home chat interface
-- Sidebar program details
-- Role recommendation output
+![Home and role recommendation form](assets/screenshot-home-role-form.png)
+
+### Interactive Sidebar Role Details
+
+![Full Stack Development role details](assets/screenshot-full-stack-role.png)
+
+### Chat History With Role Response
+
+![Chat history with role response](assets/screenshot-chat-role-response.png)
+
+### Complete Sidebar Role List
+
+![Complete sidebar role list](assets/screenshot-sidebar-role-list.png)
 
 ## Example Questions
 
