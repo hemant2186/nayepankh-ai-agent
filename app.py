@@ -57,6 +57,25 @@ ROLE_KEYWORDS: Dict[str, List[str]] = {
 }
 
 
+ROLE_DESCRIPTIONS: Dict[str, str] = {
+    "Full Stack Development": "build complete web features across frontend, backend, and APIs",
+    "Front End Development": "create responsive user interfaces with HTML, CSS, JavaScript, or React",
+    "Web Development": "design and develop websites and practical web applications",
+    "Artificial Intelligence": "work on AI concepts, intelligent features, and applied AI use cases",
+    "Data Analytics": "analyze data, create reports, and build dashboards using tools like SQL or Excel",
+    "Java Development": "develop Java-based applications using OOP and backend fundamentals",
+    "Python Development": "build scripts, automation, APIs, and backend utilities using Python",
+    "Machine Learning": "work on data preprocessing, model training, evaluation, and ML projects",
+    "Backend Development": "create APIs, database flows, and server-side application logic",
+    "UI/UX Design": "design user flows, wireframes, prototypes, and clean product experiences",
+    "AI Agent Development": "build chatbot and agent workflows using LLMs, prompts, memory, and APIs",
+    "No Code Development": "create functional tools using no-code automation and app builder platforms",
+    "Mobile App Development": "build mobile app screens and features for Android, iOS, or cross-platform apps",
+    "WordPress Development": "create and customize CMS websites with WordPress themes and plugins",
+    "AI Web Development": "combine AI features with web applications and interactive user interfaces",
+}
+
+
 def load_api_key() -> str:
     """Load Gemini API key from Streamlit secrets, environment, or a local .env file."""
     load_dotenv()
@@ -151,6 +170,37 @@ User message:
     return text.strip()
 
 
+def friendly_llm_error() -> str:
+    return (
+        "The AI service is temporarily busy, so I am showing a reliable knowledge-base response. "
+        "Please try again shortly for a Gemini-generated answer."
+    )
+
+
+def build_role_overview(role: str) -> str:
+    description = ROLE_DESCRIPTIONS.get(role, "explore a practical internship role at NayePankh Foundation")
+    return f"""
+**{role}** is a suitable NayePankh internship option if you want to {description}.
+
+**Internship details**
+- Duration: 1 month
+- Mode: Remote
+- Schedule: Flexible working hours
+- Eligibility: Open to students and freshers
+- Compensation: Unpaid internship
+
+**Perks**
+- Offer Letter
+- Internship Certificate
+- Appreciation Certificate
+- Letter of Recommendation
+- LinkedIn Recommendation
+
+**Best next step**
+Prepare 2-3 small projects or examples that show your interest in {role}, then apply with a clear summary of your skills.
+""".strip()
+
+
 def local_role_recommendation(skills: str, interests: str = "") -> List[str]:
     combined = f"{skills} {interests}".lower()
     scores = []
@@ -221,10 +271,10 @@ One practical next step.
         if len(response.split()) < 35 or "recommended next step" not in response.lower():
             return fallback_response
         return response
-    except RuntimeError as exc:
+    except RuntimeError:
         return (
             f"{fallback_response}\n\n"
-            f"Note: Gemini could not be reached right now. {exc}"
+            f"Note: {friendly_llm_error()}"
         )
 
 
@@ -281,13 +331,28 @@ def inject_custom_css() -> None:
             }
 
             .role-pill {
-                display: inline-block;
-                padding: 0.35rem 0.55rem;
-                margin: 0.2rem 0.15rem 0.2rem 0;
+                margin-bottom: 0.35rem;
+            }
+
+            [data-testid="stSidebar"] .stButton button {
+                width: 100%;
+                justify-content: flex-start;
+                min-height: 2rem;
+                padding: 0.35rem 0.6rem;
                 border-radius: 999px;
-                background: rgba(255,255,255,0.12);
-                border: 1px solid rgba(255,255,255,0.18);
+                border: 1px solid rgba(255,255,255,0.22);
+                background: rgba(255,255,255,0.1);
+                color: #ffffff;
                 font-size: 0.82rem;
+                line-height: 1.15;
+                white-space: normal;
+                text-align: left;
+            }
+
+            [data-testid="stSidebar"] .stButton button:hover {
+                background: rgba(255,255,255,0.18);
+                border-color: rgba(255,255,255,0.42);
+                color: #ffffff;
             }
 
             div[data-testid="stChatMessage"] {
@@ -331,10 +396,11 @@ def render_sidebar() -> None:
     )
 
     st.sidebar.subheader("Available Roles")
-    st.sidebar.markdown(
-        " ".join(f'<span class="role-pill">{role}</span>' for role in AVAILABLE_ROLES),
-        unsafe_allow_html=True,
-    )
+    for role in AVAILABLE_ROLES:
+        if st.sidebar.button(role, key=f"role_{role}", use_container_width=True):
+            st.session_state.messages.append({"role": "user", "content": f"Tell me about {role} internship."})
+            st.session_state.messages.append({"role": "assistant", "content": build_role_overview(role)})
+            st.rerun()
 
     st.sidebar.divider()
     if st.sidebar.button("Clear Chat History", use_container_width=True):
@@ -417,10 +483,10 @@ def main() -> None:
             with st.spinner("Generating response..."):
                 try:
                     assistant_response = generate_response(user_prompt, knowledge_base, api_key)
-                except RuntimeError as exc:
+                except RuntimeError:
                     assistant_response = (
-                        "I am ready to help, but Gemini is not configured correctly yet. "
-                        f"{exc}"
+                        f"{friendly_llm_error()}\n\n"
+                        "You can still ask about internship duration, mode, eligibility, perks, and available roles."
                     )
                 st.markdown(assistant_response)
 
