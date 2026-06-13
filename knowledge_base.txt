@@ -1,0 +1,55 @@
+NayePankh Foundation Internship and Volunteer Knowledge Base
+
+Internship Duration: 1 Month
+Mode: Remote
+Flexible Working Hours: Yes
+Open To: Students & Freshers
+Compensation: Unpaid Internship
+
+Available Internship Roles:
+- Full Stack Development
+- Front End Development
+- Web Development
+- Artificial Intelligence
+- Data Analytics
+- Java Development
+- Python Development
+- Machine Learning
+- Backend Development
+- UI/UX Design
+- AI Agent Development
+- No Code Development
+- Mobile App Development
+- WordPress Development
+- AI Web Development
+
+Perks and Documents:
+- Offer Letter
+- Internship Certificate
+- Appreciation Certificate
+- Letter of Recommendation
+- LinkedIn Recommendation
+
+General Guidance:
+- Students and freshers can apply.
+- The internship is remote and suitable for candidates who need flexible working hours.
+- Candidates should choose a role that matches their existing skills, learning goals, and interests.
+- The assistant should never guarantee selection, paid compensation, or perks beyond the listed knowledge base.
+- For final application deadlines, joining details, or official policy changes, candidates should contact the NayePankh Foundation team.
+
+Role Matching Guide:
+- AI Agent Development: Good for candidates with LLMs, prompt engineering, Python, APIs, chatbots, RAG, or automation interest.
+- Artificial Intelligence: Good for candidates interested in AI concepts, NLP, computer vision, and intelligent systems.
+- Machine Learning: Good for candidates with Python, statistics, pandas, scikit-learn, model training, and data projects.
+- Python Development: Good for candidates with Python, scripting, automation, Flask, Django, or FastAPI.
+- Backend Development: Good for candidates with APIs, databases, server-side logic, authentication, or deployment.
+- Data Analytics: Good for candidates with SQL, Excel, dashboards, data visualization, Power BI, Tableau, or reporting.
+- Full Stack Development: Good for candidates with both frontend and backend skills.
+- Front End Development: Good for candidates with HTML, CSS, JavaScript, React, and responsive UI skills.
+- Web Development: Good for candidates who want to build websites and web applications.
+- UI/UX Design: Good for candidates with Figma, wireframes, user research, prototypes, and visual design.
+- Mobile App Development: Good for candidates interested in Android, iOS, Flutter, or React Native.
+- Java Development: Good for candidates with Java, OOP, Spring, or backend fundamentals.
+- WordPress Development: Good for candidates with CMS, Elementor, themes, plugins, and content websites.
+- No Code Development: Good for candidates using tools such as Bubble, Webflow, Zapier, Airtable, or automation platforms.
+- AI Web Development: Good for candidates interested in combining AI features with web applications.
